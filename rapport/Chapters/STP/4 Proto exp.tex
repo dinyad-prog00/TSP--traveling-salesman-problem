@@ -1,0 +1,34 @@
+\section{Protocole expérimental}
+
+Pour comparer les méthodes par la suite, nous avons fait plusieurs exécutions
+par méthode. 
+
+\begin{itemize}
+	\item Pour les descentes
+	
+	Nous somme partis de 10 solutions initiales différentes. Pour chaque triplet (instance, algo de descente, solution initiale), nous avons fait une exécution. Donc au total 8x6x10=480 exécutions.  Nous avons utilisé des $seeds$ (10 seeds) pour la gestion des solutions initiales. 
+	
+	Le score des optima et les temps d'exécution sont conservé dans un fichier csv d'entête : 
+	$Instance,Algorithme,Seed,Score,CPU-Used-Time (ms)$
+	
+	\item Pour ILS et SW
+	
+	Nous somme partis de 10 solutions initiales différentes, de deux valeurs de nombre de perturbations et de $\lambda$ et utilisé la même valeur pour nombre d’évaluation maximal.
+	
+	\begin{itemize}
+		\item ILS : une exécution par (instance, algo ISL, solution initiale, nb perturbation)
+		
+		8*4*10*2 = 640
+		
+		Entête CSV : $Instance,Algorithme,Seed,Score,NbPertubations,MaxEval,CPU-Used-Time (ms)$
+		
+		\item SW : une exécution par (instance, algo SW, solution initiale, lambda)
+		
+		8*2*10*2 = 320
+		
+		
+		Entête CSV : $Instance,Algorithme,Seed,Score,Lambda,MaxEval,CPU-Used-Time (ms)$
+	\end{itemize}
+	
+	
+\end{itemize}

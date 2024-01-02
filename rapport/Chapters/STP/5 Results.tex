@@ -1,0 +1,213 @@
+\section{Résultats obtenus}
+
+\subsection{Descentes}
+\subsubsection{Résultats des versus}
+Les deux tableaux suivants présentent combien de fois sur 10 exécution une méthode gagne contre l'autre. 
+
+Pour methode1\_vs\_methode2, $(n_1,n_2)$ signifie que methode1 gagne $n_1$ fois et methode2 gagne $n_2$ fois. Évidemment $n_1+n_2=10$.
+\iffalse
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{list of symbols}
+	\begin{tabular}[t]
+		{m{0.1\textwidth}m{0.25\textwidth}m{0.25\textwidth}m{0.2\textwidth}}
+		\toprule
+		\textbf{Symbol}&\textbf{dimension}&\textbf{Unit}&\textbf{Unit abbreviation}\\
+		\midrule
+		1&2&3&4\\
+		1&2&3&4\\
+		1&2&3&4\\
+		1&2&3&4\\
+		\bottomrule
+	\end{tabular}
+
+\end{table}
+
+
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Nombre de fois qu'une méthode gagne contre l'autre}
+		\begin{tabular}[t]
+			{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth}m{0.2\textwidth}}
+			\toprule
+	instances &	swap\_first\_vs\_best&	swap\_first\_vs\_worst &	swap\_best\_vs\_worst&	2opt\_first\_vs\_best&	2opt\_first\_vs\_worst&	2opt\_best\_vs\_worst\\
+	\midrule
+	rand\_50\_75.txt&	(6, 4)&	(5, 5)&	(4, 6)&	(7, 3)&	(8, 2)&	(6, 4)\\
+	rand\_50\_100.txt&	(5, 5)&	(6, 4)&	(5, 5)&	(9, 1)&	(10, 0)&	(7, 3)\\
+	rand\_60\_50.txt&	(4, 6)&	(3, 7)&	(5, 5)&	(8, 2)&	(10, 0)&	(7, 3)\\
+	rand\_60\_100.txt&	(4, 6)&	(5, 5)&	(5, 5)&	(9, 1)&	(10, 0)&	(7, 3)\\
+	rand\_70\_55.txt&	(7, 3)&	(4, 6)&	(5, 5)&	(10, 0)&	(8, 2)&	(3, 7)\\
+	rand\_70\_100.txt&	(5, 5)&	(6, 4)&	(4, 6)&	(9, 1)&	(10, 0)&	(5, 5)\\
+	rand\_80\_70.txt&	(3, 7)&	(5, 5)&	(3, 7)&	(10, 0)&	(10, 0)&	(5, 5)\\
+	rand\_80\_100.txt&	(6, 4)&	(5, 5)&	(5, 5)&	(9, 1)	&(10, 0)&	(4, 6)\\
+	\bottomrule
+\end{tabular}
+\end{table}
+\fi
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Nombre de fois qu'une méthode gagne contre l'autre (swap)}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}}
+		\toprule
+		instances &	swap\_first\_vs\_best&	swap\_first\_vs\_worst &	swap\_best\_vs\_worst\\
+		\midrule
+		rand\_50\_75.txt&	(6, 4)&	(5, 5)&	(4, 6)\\
+		rand\_50\_100.txt&	(5, 5)&	(6, 4)&	(5, 5)\\
+		rand\_60\_50.txt&	(4, 6)&	(3, 7)&	(5, 5)\\
+		rand\_60\_100.txt&	(4, 6)&	(5, 5)&	(5, 5)\\
+		rand\_70\_55.txt&	(7, 3)&	(4, 6)&	(5, 5)\\
+		rand\_70\_100.txt&	(5, 5)&	(6, 4)&	(4, 6)\\
+		rand\_80\_70.txt&	(3, 7)&	(5, 5)&	(3, 7)\\
+		rand\_80\_100.txt&	(6, 4)&	(5, 5)&	(5, 5)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Nombre de fois qu'une méthode gagne contre l'autre (2opt)}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth} m{0.2\textwidth} m{0.2\textwidth}m{0.2\textwidth}}
+		\toprule
+		instances &		2opt\_first\_vs\_best&	2opt\_first\_vs\_worst&	2opt\_best\_vs\_worst\\
+		\midrule
+		rand\_50\_75.txt&		(7, 3)&	(8, 2)&	(6, 4)\\
+		rand\_50\_100.txt&		(9, 1)&	(10, 0)&	(7, 3)\\
+		rand\_60\_50.txt&		(8, 2)&	(10, 0)&	(7, 3)\\
+		rand\_60\_100.txt&		(9, 1)&	(10, 0)&	(7, 3)\\
+		rand\_70\_55.txt&		(10, 0)&	(8, 2)&	(3, 7)\\
+		rand\_70\_100.txt&		(9, 1)&	(10, 0)&	(5, 5)\\
+		rand\_80\_70.txt&	    (10, 0)&	(10, 0)&	(5, 5)\\
+		rand\_80\_100.txt&		(9, 1)	&(10, 0)&	(4, 6)\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\subsubsection{Moyenne}
+En prenant la moyenne des scores, on a :  
+
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Moyenne des scores}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth} }
+		\toprule
+		 &		first&	worst&	best\\
+		\midrule
+		swap&		1205.8250&	1207.7250&	1206.7625\\
+		2opt&		1596.2125&1809.1750 &	1801.5000\\
+	
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+On constate que dans le deux cas, \textbf{first} semble être la meilleur méthode.
+
+%On peut aussi déduire des deux premiers tableaux que\textbf{ first} gagne \textbf{115} fois contre \textbf{worst} et\textbf{ worst} seulement \textbf{45} fois contre \textbf{first}. 
+
+\subsection{ILS et SW}
+
+\subsubsection{ILS}
+\begin{itemize}
+	\item \textbf{Résultats des versus}
+	
+	Le tableau suivant présente combien de fois sur 20 exécutions (deux valeurs pour nombre de perturbations) une méthode gagne contre l'autre. 
+	
+	\begin{table}[ht]
+		\rowcolors{2}{gray!10}{white}
+		\centering
+		\caption{Nombre de fois qu'une méthode gagne contre l'autre}
+		\begin{tabular}[t]
+			{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}}
+			\toprule
+			instances &	swap\_first\_vs\_best &	2opt\_first\_vs\_best \\
+			
+			\midrule
+			rand\_50\_75.txt&	(11, 9)	&(16, 4)\\
+			rand\_50\_100.txt&	(10, 10)&	(19, 1)\\
+			rand\_60\_50.txt&	(13, 7)&	(17, 3)\\
+			rand\_60\_100.txt&	(5, 15)&	(15, 5)\\
+			rand\_70\_55.txt&	(14, 6)&	(16, 4)\\
+			rand\_70\_100.txt&	(13, 7)	&(19, 1)\\
+			rand\_80\_70.txt&	(14, 6)&	(18, 2)\\
+			rand\_80\_100.txt&	(19, 1)&	(17, 3)\\
+			
+		
+			\bottomrule
+		\end{tabular}
+	\end{table}
+\item \textbf{Moyenne }
+
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Moyenne des scores}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}}
+		\toprule
+		méthode &		first&		best\\
+		\midrule
+		swap&		1166.0875&	1180.1875\\
+		2opt&		1553.9625& 1697.6750 \\
+		
+		\bottomrule
+	\end{tabular}
+\end{table}
+On constate que \textbf{first} domine \textbf{best}.
+\end{itemize}
+
+
+\subsubsection{SW}
+\begin{itemize}
+	\item \textbf{Résultats des versus}
+	
+	Le tableau suivant présente combien de fois sur 20 exécutions (deux valeurs pour nombre de perturbations) une méthode gagne contre l'autre. 
+	
+	\begin{table}[ht]
+		\rowcolors{2}{gray!10}{white}
+		\centering
+		\caption{Nombre de fois qu'une méthode gagne contre l'autre}
+		\begin{tabular}[t]
+			{m{0.2\textwidth}m{0.2\textwidth}}
+			\toprule
+			instances &	swap\_vs\_2opt  \\
+			
+			\midrule
+			rand\_50\_75.txt& (10, 10)	\\
+			rand\_50\_100.txt& (13, 7)	\\
+			rand\_60\_50.txt& (10, 10)	\\
+			rand\_60\_100.txt& (8, 12)	\\
+			rand\_70\_55.txt&	(10, 10)\\
+			rand\_70\_100.txt&	(9, 11)\\
+			rand\_80\_70.txt&(12, 8)	\\
+			rand\_80\_100.txt&	(6, 14)\\
+			
+			
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	\item \textbf{Moyenne }
+	
+	\begin{table}[ht]
+		\rowcolors{2}{gray!10}{white}
+		\centering
+		\caption{Moyenne des scores}
+		\begin{tabular}[t]
+			{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}}
+			\toprule
+			 &		Moyenne\\
+			\midrule
+			swap&		2861.76875 \\
+			2opt&		2829.88125\\
+			
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	On constate que \textbf{2opt} domine \textbf{swap}.
+\end{itemize}
