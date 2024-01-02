@@ -5,6 +5,7 @@
 #include "lib.h"
 int main(int argc, char const *argv[])
 {
+    srand(time(NULL));
     Instance *instance = load_instance("instances/atsp_rand_80_70.txt");
     printf("size : %d\n", instance->dim);
 
@@ -58,21 +59,21 @@ int main(int argc, char const *argv[])
     //int *final = descente(instance,solution, worst_improver_2opt);
 
     //int *final = descente(instance,solution, first_improver_swap);
-    int *final = descente(instance,solution, first_improver_2opt);
+    //int *final = descente(instance,solution, first_improver_2opt);
 
     // Local search
     // int *final = iterated_local_search_best_improver_swap(instance, solution, 3, 500000);
 
     // int *final = sampled_walk_swap(instance, solution, 4, 200);
 
-    printf("\nSolution final: \n");
-    print_tab(final, instance->dim);
-    printf("\nNombre evaluations: %d", nombre_evaluations);
+    // printf("\nSolution final: \n");
+    // print_tab(final, instance->dim);
+    // printf("\nNombre evaluations: %d", nombre_evaluations);
     free_instance(instance);
     free(solution);
     free(moves);
 
-    //execute();
+    execute();
 
     return 0;
 }

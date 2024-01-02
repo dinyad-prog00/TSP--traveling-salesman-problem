@@ -438,4 +438,3 @@ instances/atsp_rand_70_100.txt,iterated_local_search_best_improver_swap,57,1149,
 instances/atsp_rand_70_100.txt,iterated_local_search_best_improver_swap,58,1098,6,10000000,2437.024000
 instances/atsp_rand_70_100.txt,iterated_local_search_best_improver_swap,58,1173,9,10000000,2220.289000
 instances/atsp_rand_70_100.txt,iterated_local_search_best_improver_swap,59,1112,6,10000000,2149.672000
-instances/a

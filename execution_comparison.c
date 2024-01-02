@@ -87,7 +87,7 @@ void execute_ILS(char *instances_path[], int nb_instances, AlgorithmILS ils_algo
     printf("\n\033[0m");
 }
 
-void execute_SW(char *instances_path[], int nb_instances, AlgorithmILS ils_algos[], char *algos_names[], int nb_algo, int nb_initial_solution, int max_eval)
+void execute_SW(char *instances_path[], int nb_instances, AlgorithmSW sw_algos[], char *algos_names[], int nb_algo, int nb_initial_solution, int max_eval)
 {
     int seed = 50, cost;
     int *initial_solution, *final;
@@ -108,7 +108,7 @@ void execute_SW(char *instances_path[], int nb_instances, AlgorithmILS ils_algos
         instance = load_instance(instances_path[i]);
         for (int j = 0; j < nb_algo; j++)
         {
-            algo = ils_algos[j];
+            algo = sw_algos[j];
             for (int k = 0; k < nb_initial_solution; k++)
             {
 
@@ -126,8 +126,11 @@ void execute_SW(char *instances_path[], int nb_instances, AlgorithmILS ils_algos
                     double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
                     fprintf(file, "\n%s,%s,%d,%d,%d,%d,%f", instances_path[i], algos_names[j], seed + k, cost, lambdas[l], max_eval, cpu_time_used * 1000);
+                   
                     printf(".............Done %f ms", cpu_time_used * 1000);
+                    free(final);
                 }
+                free(initial_solution);
             }
             printf("\n");
         }
@@ -191,13 +194,14 @@ void execute()
         "sampled_walk_swap",
         "sampled_walk_2opt"};
 
-    int max_evaluation = 10000000;
+    //int max_evaluation = 10000000;
+    int max_evaluation = 1000000;
 
     start_time = clock();
     //execute_descentes(instances_path,8, descente_algos, descente_algos_names, 6, 10);
-    execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
-
-    //execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
+    //execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
+    execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
+    
     end_time = clock();
     double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 

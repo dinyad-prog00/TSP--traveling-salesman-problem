@@ -56,8 +56,6 @@ int *iterated_local_search(Instance *instance, int *soltution, Algorithm algo, M
     return best_sol;
 }
 
-
-
 int *iterated_local_search_best_improver_swap(Instance *instance, int *soltution, int nb_pertubations, int max_eval)
 {
     return iterated_local_search(instance, soltution, best_improver_swap, apply_move_swap, nb_pertubations, max_eval);
@@ -88,7 +86,7 @@ Move *generate_n_moves(Move *moves, int nb_moves, int n)
     {
         indexes[i] = i;
     }
-    srand(time(NULL));
+    
 
     // Melange Fisher-Yates
     for (i = nb_moves - 1; i > 0; i--)
@@ -114,11 +112,12 @@ int *sampled_walk(Instance *instance, int *soltution, MoveApplicator move_applic
     Move *moves = generate_swap_moves(instance->dim, &nb_moves);
 
     int step = 0;
-    int *best_sol = soltution, *new_sol;
+    int *best_sol = soltution, *new_sol, *cur_sol;
     Move *lambda_moves;
-
+    
     while (nombre_evaluations < max_eval)
     {
+        // generate and choice best -> sortie : cur_sol
         lambda_moves = generate_n_moves(moves, nb_moves, lambda);
         for (int i = 0; i < lambda; i++)
         {
@@ -126,12 +125,13 @@ int *sampled_walk(Instance *instance, int *soltution, MoveApplicator move_applic
 
             if (i == 0)
             {
-                best_sol = new_sol;
+                
+                cur_sol = new_sol;
             }
-            else if (cost_function(instance, new_sol) < cost_function(instance, best_sol))
+            else if (cost_function(instance, new_sol) < cost_function(instance, cur_sol))
             {
-                // printf("\n\033[31mbest found==========================\033[0m\n");
-                best_sol = new_sol;
+                free(cur_sol);
+                cur_sol = new_sol;
             }
 
             else
@@ -139,13 +139,26 @@ int *sampled_walk(Instance *instance, int *soltution, MoveApplicator move_applic
                 free(new_sol);
             }
         }
+
+        // update best_sol
+        if (cost_function(instance, best_sol) > cost_function(instance, cur_sol))
+        {
+            
+            best_sol = cur_sol;
+        }
+
+        free(lambda_moves);
+
+        // log purpose
         step++;
+
+       
     }
+
+    free(cur_sol);
 
     return best_sol;
 }
-
-
 
 int *sampled_walk_swap(Instance *instance, int *soltution, int lambda, int max_eval)
 {
