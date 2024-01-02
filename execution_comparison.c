@@ -199,8 +199,8 @@ void execute()
 
     start_time = clock();
     //execute_descentes(instances_path,8, descente_algos, descente_algos_names, 6, 10);
-    //execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
-    execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
+    execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
+    //execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
     
     end_time = clock();
     double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;

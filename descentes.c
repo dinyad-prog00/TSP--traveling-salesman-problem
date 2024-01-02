@@ -236,14 +236,14 @@ int *descente(Instance *instance, int *solution, Algorithm algo)
         return solution;
     }
 
-    printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
+    //printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
     nb_itter++;
     // print_tab(new_solution, instance->dim);
 
     while (found)
     {
         cost = cost_function(instance, new_solution);
-        printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
+        //printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
         nb_itter++;
         // print_tab(new_solution, instance->dim);
         // printf("\n");
