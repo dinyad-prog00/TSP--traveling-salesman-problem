@@ -7,4 +7,5 @@
 #include <time.h>
 #include <limits.h>
 
+extern int nombre_evaluations;
 #endif

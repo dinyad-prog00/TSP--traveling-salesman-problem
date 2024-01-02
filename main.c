@@ -1,14 +1,16 @@
 #include "initialisation.h"
 #include "descentes.h"
+#include "local_search.h"
+#include "execution_comparison.h"
 #include "lib.h"
 int main(int argc, char const *argv[])
 {
     Instance *instance = load_instance("instances/atsp_rand_80_70.txt");
     printf("size : %d\n", instance->dim);
 
-    print_matrix(instance->matrix, instance->dim);
+    //print_matrix(instance->matrix, instance->dim);
 
-    int *solution = random_solution(instance->dim);
+    int *solution = random_solution(instance->dim, 5);
     printf("\nSolution:\n");
     print_tab(solution, instance->dim);
 
@@ -28,7 +30,7 @@ int main(int argc, char const *argv[])
     Move *moves = generate_swap_moves(num_cities, &num_moves);
 
     // Tests
-    //int best_found;
+    // int best_found;
     // int *best = best_improver_swap(instance, solution, cost, moves, num_moves, &best_found);
     //  int *best = best_improver_2opt(instance, solution, cost, moves, num_moves, &best_found);
 
@@ -49,21 +51,28 @@ int main(int argc, char const *argv[])
     // }
 
     // Test algo
-     int *final = descente(instance, best_improver_swap);
-    // int *final = descente(instance, best_improver_2opt);
+    //int *final = descente(instance, solution, best_improver_swap);
+    // int *final = descente(instance,solution, best_improver_2opt);
 
-    // int *final = descente(instance, worst_improver_swap);
-    // int *final = descente(instance, worst_improver_2opt);
+    //int *final = descente(instance,solution, worst_improver_swap);
+    //int *final = descente(instance,solution, worst_improver_2opt);
 
-    // int *final = descente(instance, first_improver_swap);
-    //int *final = descente(instance, first_improver_2opt);
+    //int *final = descente(instance,solution, first_improver_swap);
+    int *final = descente(instance,solution, first_improver_2opt);
+
+    // Local search
+    // int *final = iterated_local_search_best_improver_swap(instance, solution, 3, 500000);
+
+    // int *final = sampled_walk_swap(instance, solution, 4, 200);
 
     printf("\nSolution final: \n");
     print_tab(final, instance->dim);
-
-    free(instance);
+    printf("\nNombre evaluations: %d", nombre_evaluations);
+    free_instance(instance);
     free(solution);
     free(moves);
+
+    //execute();
 
     return 0;
 }

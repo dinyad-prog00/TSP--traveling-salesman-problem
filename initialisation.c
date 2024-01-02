@@ -1,5 +1,6 @@
 #include "initialisation.h"
 #include "lib.h"
+int nombre_evaluations;
 int **locate_matrix_memory(int size)
 {
     int **matrix;
@@ -58,7 +59,7 @@ Instance *load_instance(char *file_name)
             if (strcmp(read, "DIMENSION:") == 0)
             {
                 fscanf(file, "%d", &(instance->dim));
-                
+
                 instance->matrix = locate_matrix_memory(instance->dim);
                 if (instance->matrix == NULL)
                 {
@@ -67,7 +68,7 @@ Instance *load_instance(char *file_name)
             }
             if (strcmp(read, "EDGE_WEIGHT_SECTION") == 0)
             {
-                
+
                 startFill = 1;
             }
         }
@@ -114,7 +115,7 @@ void print_matrix(int **matrix, int size)
 
 void print_tab(int *tab, int size)
 {
-   
+
     // if(tab==NULL){
     //     printf("Oh no!!!!");
     // }else{
@@ -128,7 +129,7 @@ void print_tab(int *tab, int size)
     printf("\n");
 }
 
-int *random_solution(int size)
+int *random_solution(int size, int seed)
 {
     int *permutation = (int *)malloc(size * sizeof(int));
 
@@ -136,7 +137,7 @@ int *random_solution(int size)
     {
         permutation[i] = i;
     }
-    srand(time(NULL));
+    srand(seed);
 
     // Melange Fisher-Yates
     for (int i = size - 1; i > 0; i--)
@@ -151,6 +152,10 @@ int *random_solution(int size)
 
 int cost_function(Instance *instance, int *solution)
 {
+    /// Incrementer le nombre d'évaluation pour chaque appel
+    nombre_evaluations++;
+    ///
+
     int ct = 0;
     for (int i = 0; i < instance->dim - 1; i++)
     {
@@ -195,4 +200,25 @@ void print_moves(Move *moves, int num_moves)
         printf("(%d, %d) ", moves[i].c1, moves[i].c2);
     }
     printf("\n");
+}
+
+void free_instance(Instance *instance)
+{
+    if (instance == NULL)
+        return;
+
+    if (instance->matrix != NULL)
+    {
+        for (size_t i = 0; i < instance->dim; i++)
+        {
+            if (instance->matrix[i] != NULL)
+            {
+                free(instance->matrix[i]);
+            }
+        }
+
+        free(instance->matrix);
+    }
+
+    free(instance);
 }

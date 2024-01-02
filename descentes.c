@@ -1,6 +1,7 @@
 #include "descentes.h"
 #include "initialisation.h"
 #include "lib.h"
+
 int *apply_move_swap(int *solution, int size, Move move)
 {
     int *new = (int *)malloc(size * sizeof(int));
@@ -147,7 +148,7 @@ int *best_improver_2opt(Instance *instance, int *solution, int cost, Move *moves
 
         if (new_cost < cost)
         {
-            printf("i'm in");
+
             cost = new_cost;
             best_move = moves[i];
             *best_found = 1;
@@ -219,33 +220,33 @@ int *first_improver_2opt(Instance *instance, int *solution, int cost, Move *move
     return NULL;
 }
 
-int *descente(Instance *instance, Algorithm algo)
+int *descente(Instance *instance, int *solution, Algorithm algo)
 {
     int num_moves, found = 0, nb_itter = 0;
 
     Move *moves = generate_swap_moves(instance->dim, &num_moves);
-
-    int *solution = random_solution(instance->dim);
     int cost = cost_function(instance, solution);
 
     int *new_solution = algo(instance, solution, cost, moves, num_moves, &found);
-    int * best_solution;
+    int *best_solution;
 
     if (!found)
     {
-        printf("No improvement done");
+        // printf("No improvement done");
         return solution;
     }
-    nb_itter++;
+
     printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
-    print_tab(new_solution, instance->dim);
+    nb_itter++;
+    // print_tab(new_solution, instance->dim);
 
     while (found)
     {
         cost = cost_function(instance, new_solution);
-        printf("\nitter %d , cost : %d => ", nb_itter, cost);
-        print_tab(new_solution, instance->dim);
-        printf("\n");
+        printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
+        nb_itter++;
+        // print_tab(new_solution, instance->dim);
+        // printf("\n");
         best_solution = new_solution;
         new_solution = algo(instance, new_solution, cost, moves, num_moves, &found);
         nb_itter++;
