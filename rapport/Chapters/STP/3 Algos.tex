@@ -19,7 +19,7 @@ Les algorithmes de descente sont des méthodes heuristiques qui visent à améli
 	
 	Dans les pseudos codes nous tenons seulement compte des arguments importants pour la compréhension.
 	
-	\begin{algorithm}
+	\begin{algorithm}[H]
 		\caption{Meilleur améliorant}
 		\label{algo:meilleur_aml}
 		\begin{algorithmic}[1]
@@ -49,7 +49,7 @@ Les algorithmes de descente sont des méthodes heuristiques qui visent à améli
 	
 	Contrairement à l'algorithme du meilleur améliorant, l'algorithme du premier améliorant (Algo ~\ref{algo:first_improver}) s'arrête dès qu'il trouve le premier voisin qui améliore la solution courante.
 	
-		\begin{algorithm}
+		\begin{algorithm}[H]
 		\caption{Premier améliorant}
 		\label{algo:first_improver}
 		\begin{algorithmic}[1]
@@ -76,7 +76,7 @@ Les algorithmes de descente sont des méthodes heuristiques qui visent à améli
 	\item Pire améliorant
 	L'algorithme du pire améliorant (Algo ~\ref{algo:worst_improver}) explore tous les voisins d'une solution et sélectionne celui qui offre la pire amélioration.
 	
-		\begin{algorithm}
+		\begin{algorithm}[H]
 		\caption{Pire améliorant}
 		\label{algo:worst_improver}
 		\begin{algorithmic}[1]
@@ -117,7 +117,7 @@ En utilisant les deux relations de voisinage pour chacun on six algos de choix d
 \subsubsection{Descente complète}
 On part d’une solution initiale. Tant que la solution courante n’est pas un optimum local, on génère un voisin selon le couple (voisinage, pivot) pour remplacer la solution courante. Voici son pseudo code Aglo~\ref{algo:descente} :
 
-	\begin{algorithm}
+	\begin{algorithm}[H]
 	\caption{Descente complète}
 	\label{algo:descente}
 	\begin{algorithmic}[1]
@@ -151,7 +151,7 @@ la solution retournée sera la meilleure rencontrée.
 
 Le critère d'arrêt utilisé est le nombre d’évaluation maximal.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\caption{ILS}
 	\label{algo:ils}
 	\begin{algorithmic}[1]
@@ -190,7 +190,7 @@ Le critère d'arrêt utilisé est le nombre d’évaluation maximal.
 SW (Algo~\ref{algo:sw}) est une recherche locale dont le principe est de générer $\lambda$ voisins à chaque étape de la recherche et de sélectionner celui au meilleur score.
 Le critère d'arrêt utilisé est le nombre d’évaluation maximal.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 	\caption{SW}
 	\label{algo:sw}
 	\begin{algorithmic}[1]

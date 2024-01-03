@@ -88,7 +88,7 @@ Pour methode1\_vs\_methode2, $(n_1,n_2)$ signifie que methode1 gagne $n_1$ fois 
 	\end{tabular}
 \end{table}
 
-\subsubsection{Moyenne}
+\subsubsection{Moyenne des scores}
 En prenant la moyenne des scores, on a :  
 
 \begin{table}[ht]
@@ -110,6 +110,26 @@ En prenant la moyenne des scores, on a :
 On constate que dans le deux cas, \textbf{first} semble être la meilleur méthode.
 
 %On peut aussi déduire des deux premiers tableaux que\textbf{ first} gagne \textbf{115} fois contre \textbf{worst} et\textbf{ worst} seulement \textbf{45} fois contre \textbf{first}. 
+\subsubsection{Durée et influence de l'évaluation incrémentale}
+Le tableau suivant résume la durée moyenne des \textbf{descentes swap} avec et sans l'évaluation incrémentale (EI).
+\begin{table}[ht]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Moyenne des durées en ms}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth}m{0.2\textwidth} }
+		\toprule
+		&best\_improver&	first\_improver&	wors\_improver\\
+		\midrule
+		sans EI &		23.713987&	7.646788&	885.963613\\
+		avec EI &		4.497738& 0.354200 &	50.475100\\
+		
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Il en ressort que \textbf{first} est plus rapide que \textbf{best} qui est plus rapide que \textbf{worst}. On remarque aussi que l'\textbf{évaluation incrémentale} a considérablement améloré la rapidité. 
+
 
 \subsection{ILS et SW}
 
@@ -129,20 +149,20 @@ On constate que dans le deux cas, \textbf{first} semble être la meilleur métho
 			instances &	swap\_first\_vs\_best &	2opt\_first\_vs\_best \\
 			
 			\midrule
-			rand\_50\_75.txt&	(11, 9)	&(16, 4)\\
-			rand\_50\_100.txt&	(10, 10)&	(19, 1)\\
-			rand\_60\_50.txt&	(13, 7)&	(17, 3)\\
-			rand\_60\_100.txt&	(5, 15)&	(15, 5)\\
-			rand\_70\_55.txt&	(14, 6)&	(16, 4)\\
-			rand\_70\_100.txt&	(13, 7)	&(19, 1)\\
-			rand\_80\_70.txt&	(14, 6)&	(18, 2)\\
-			rand\_80\_100.txt&	(19, 1)&	(17, 3)\\
+			rand\_50\_75.txt&	(11, 9)	&(15, 5)\\
+			rand\_50\_100.txt&	(5, 15)&	(19, 1)\\
+			rand\_60\_50.txt&	(11, 9)&	(17, 3)\\
+			rand\_60\_100.txt&	(6, 14)&	(18, 2)\\
+			rand\_70\_55.txt&	(9, 11)&	(18, 2)\\
+			rand\_70\_100.txt&	(13, 7)	&(20, 0)\\
+			rand\_80\_70.txt&	(10, 10)	&	(18, 2)\\
+			rand\_80\_100.txt&	(10, 10)	&	(18, 2)\\
 			
 		
 			\bottomrule
 		\end{tabular}
 	\end{table}
-\item \textbf{Moyenne }
+\item \textbf{Moyenne des scores}
 
 \begin{table}[ht]
 	\rowcolors{2}{gray!10}{white}
@@ -153,13 +173,13 @@ On constate que dans le deux cas, \textbf{first} semble être la meilleur métho
 		\toprule
 		méthode &		first&		best\\
 		\midrule
-		swap&		1166.0875&	1180.1875\\
-		2opt&		1553.9625& 1697.6750 \\
+		swap&		1163.11250&	1161.33750\\
+		2opt&		1496.33125& 1654.21875 \\
 		
 		\bottomrule
 	\end{tabular}
 \end{table}
-On constate que \textbf{first} domine \textbf{best}.
+On constate que \textbf{first} domine \textbf{best} pour 2opt mais pas pour swap.
 \end{itemize}
 
 
@@ -169,7 +189,7 @@ On constate que \textbf{first} domine \textbf{best}.
 	
 	Le tableau suivant présente combien de fois sur 20 exécutions (deux valeurs pour nombre de perturbations) une méthode gagne contre l'autre. 
 	
-	\begin{table}[ht]
+	\begin{table}[H]
 		\rowcolors{2}{gray!10}{white}
 		\centering
 		\caption{Nombre de fois qu'une méthode gagne contre l'autre}
@@ -179,20 +199,20 @@ On constate que \textbf{first} domine \textbf{best}.
 			instances &	swap\_vs\_2opt  \\
 			
 			\midrule
-			rand\_50\_75.txt& (10, 10)	\\
-			rand\_50\_100.txt& (13, 7)	\\
-			rand\_60\_50.txt& (10, 10)	\\
-			rand\_60\_100.txt& (8, 12)	\\
-			rand\_70\_55.txt&	(10, 10)\\
-			rand\_70\_100.txt&	(9, 11)\\
-			rand\_80\_70.txt&(12, 8)	\\
-			rand\_80\_100.txt&	(6, 14)\\
+			rand\_50\_75.txt& (20, 0)	\\
+			rand\_50\_100.txt& (20, 0)	\\
+			rand\_60\_50.txt& (20, 0)	\\
+			rand\_60\_100.txt& (20, 0)	\\
+			rand\_70\_55.txt&	(20, 0)\\
+			rand\_70\_100.txt&	(20, 0)\\
+			rand\_80\_70.txt&(20, 0)	\\
+			rand\_80\_100.txt&	(20, 0)\\
 			
 			
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	\item \textbf{Moyenne }
+	\item \textbf{Moyenne des scores}
 	
 	\begin{table}[ht]
 		\rowcolors{2}{gray!10}{white}
@@ -203,11 +223,11 @@ On constate que \textbf{first} domine \textbf{best}.
 			\toprule
 			 &		Moyenne\\
 			\midrule
-			swap&		2861.76875 \\
-			2opt&		2829.88125\\
+			swap&		1209.74375 \\
+			2opt&		1818.96875\\
 			
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	On constate que \textbf{2opt} domine \textbf{swap}.
+	On constate que \textbf{swap} domine \textbf{2opt}.
 \end{itemize}

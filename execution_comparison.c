@@ -6,7 +6,7 @@ void execute_descentes(char *instances_path[], int nb_instances, Algorithm desce
     int seed = 50, cost;
     int *initial_solution, *final;
     clock_t start_time, end_time;
-    FILE *file = fopen("execution_results2/execute_descentes.csv", "w");
+    FILE *file = fopen("execution_results2/execute_descentes_incremental.csv", "w");
     fprintf(file, "Instance,Algorithme,Seed,Score,CPU-Used-Time (ms)");
 
     printf("\033[32m");
@@ -126,7 +126,7 @@ void execute_SW(char *instances_path[], int nb_instances, AlgorithmSW sw_algos[]
                     double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 
                     fprintf(file, "\n%s,%s,%d,%d,%d,%d,%f", instances_path[i], algos_names[j], seed + k, cost, lambdas[l], max_eval, cpu_time_used * 1000);
-                   
+
                     printf(".............Done %f ms", cpu_time_used * 1000);
                     free(final);
                 }
@@ -138,6 +138,29 @@ void execute_SW(char *instances_path[], int nb_instances, AlgorithmSW sw_algos[]
         free_instance(instance);
     }
     printf("\n\033[0m");
+}
+
+void execute_genetique(char *instances_path[], int nb_instances)
+{
+    // Genetique arguments
+    int nb_generations = 1000, population_size = 50, cost;
+    double crossover_rate = 0.7, mutation_rate = 0.1;
+
+    FILE *file = fopen("execution_results2/generique.csv", "w");
+    fprintf(file, "Instance,Score");
+
+    for (int i = 0; i < nb_instances; i++)
+    {
+        printf("\n\033[34mStarted with instance %s\033\n[32m", instances_path[i]);
+        Instance *instance = load_instance(instances_path[i]);
+        int *solution = genetic_algorithm(instance, nb_generations, population_size, crossover_rate, mutation_rate);
+        cost = cost_function(instance, solution);
+        fprintf(file,"\n%s,%d",instances_path[i],cost);
+        free_instance(instance);
+        free(solution);
+    }
+
+    fclose(file);
 }
 
 void execute()
@@ -194,14 +217,15 @@ void execute()
         "sampled_walk_swap",
         "sampled_walk_2opt"};
 
-    //int max_evaluation = 10000000;
+    // int max_evaluation = 10000000;
     int max_evaluation = 1000000;
 
     start_time = clock();
-    //execute_descentes(instances_path,8, descente_algos, descente_algos_names, 6, 10);
-    execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
-    //execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
-    
+    // execute_descentes(instances_path, 8, descente_algos, descente_algos_names, 6, 10);
+    //  execute_ILS(instances_path, 8, ils_algos, ils_algos_names, 4, 10, max_evaluation);
+    //  execute_SW(instances_path, 8, sw_algos, sw_algos_names, 2, 10, max_evaluation);
+
+    execute_genetique(instances_path, 8);
     end_time = clock();
     double cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
 

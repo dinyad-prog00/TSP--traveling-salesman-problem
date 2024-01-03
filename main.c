@@ -6,7 +6,7 @@
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
-    Instance *instance = load_instance("instances/atsp_rand_80_70.txt");
+    Instance *instance = load_instance("instances/atsp_rand_50_75.txt");
     printf("size : %d\n", instance->dim);
 
     //print_matrix(instance->matrix, instance->dim);
@@ -20,11 +20,13 @@ int main(int argc, char const *argv[])
 
     // test apply_move_2opt
     Move mv = {0, 4};
-    printf("\nTest apply 2opt : (0,4):\n");
+    printf("\nTest apply swap : (0,4):\n");
 
-    print_tab(apply_move_2opt(solution, instance->dim, mv), instance->dim);
+    print_tab(apply_move_swap(solution, instance->dim, mv), instance->dim);
     printf("\n");
 
+    printf("\ncout normal: %d\n",cost_function(instance,apply_move_swap(solution, instance->dim, mv)));
+    printf("\ncout incremental: %d\n", new_cost_swap(instance,solution,cost,mv));
     int num_cities = 5;
 
     int num_moves;
@@ -72,6 +74,7 @@ int main(int argc, char const *argv[])
     free_instance(instance);
     free(solution);
     free(moves);
+
 
     execute();
 

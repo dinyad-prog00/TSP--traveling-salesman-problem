@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <limits.h>
+#include <assert.h>
 
 extern int nombre_evaluations;
 #endif

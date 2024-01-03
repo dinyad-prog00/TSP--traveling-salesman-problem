@@ -35,12 +35,36 @@ int *apply_move_2opt(int *solution, int size, Move move)
 
 int new_cost_swap(Instance *instance, int *solution, int cost, Move move)
 {
-    // return cost - instance->matrix[move.c1 - 1][move.c1] - instance->matrix[move.c2][move.c2 + 1] + instance->matrix[move.c1 - 1][move.c2] + instance->matrix[move.c1][move.c2 + 1];
+    if ( (move.c1 == 0 && move.c2 == instance->dim - 1) || (move.c1 != instance->dim - 1 && move.c2 != 0 && move.c1 > move.c2))
+    {
+        int tmp = move.c1;
+        move.c1 = move.c2;
+        move.c2 = tmp;
+    }
 
-    int *new_sol = apply_move_swap(solution, instance->dim, move);
-    int c = cost_function(instance, new_sol);
-    free(new_sol);
-    return c;
+    int prev1 = solution[(move.c1 == 0) ? (instance->dim - 1) : (move.c1 - 1)];
+    int next1 = solution[(move.c1 == instance->dim - 1) ? 0 : (move.c1 + 1)];
+
+    int prev2 = solution[(move.c2 == 0) ? (instance->dim - 1) : (move.c2 - 1)];
+    int next2 = solution[(move.c2 == instance->dim - 1) ? 0 : (move.c2 + 1)];
+
+    int new_cost = cost;
+    if (isNeighbour(move, instance->dim))
+    {
+        new_cost += (-instance->matrix[prev1][solution[move.c1]] - instance->matrix[solution[move.c2]][next2] + instance->matrix[prev1][solution[move.c2]] + instance->matrix[solution[move.c1]][next2] - instance->matrix[solution[move.c1]][solution[move.c2]] + instance->matrix[solution[move.c2]][solution[move.c1]]);
+    }
+    else
+    {
+        new_cost += (instance->matrix[prev1][solution[move.c2]] + instance->matrix[solution[move.c2]][next1] + instance->matrix[prev2][solution[move.c1]] + instance->matrix[solution[move.c1]][next2]);
+        new_cost -= (instance->matrix[prev1][solution[move.c1]] + instance->matrix[solution[move.c1]][next1] + instance->matrix[prev2][solution[move.c2]] + instance->matrix[solution[move.c2]][next2]);
+    }
+
+    return new_cost;
+    // int *new_sol = apply_move_swap(solution, instance->dim, move);
+    // int c = cost_function(instance, new_sol);
+    // free(new_sol);
+    // assert(new_cost == c);
+    // return c;
 }
 
 int new_cost_2opt(Instance *instance, int *solution, int cost, Move move)
@@ -135,6 +159,12 @@ int *first_improver_swap(Instance *instance, int *solution, int cost, Move *move
     }
     return NULL;
 }
+
+int isNeighbour(Move move, int size)
+{
+    return ((move.c1 == 0 && move.c2 == size - 1) || (move.c2 == 0 && move.c1 == size - 1) || move.c1 == move.c2 + 1 || move.c2 == move.c1 + 1);
+}
+
 
 int *best_improver_2opt(Instance *instance, int *solution, int cost, Move *moves, int num_moves, int *best_found)
 {
@@ -236,14 +266,14 @@ int *descente(Instance *instance, int *solution, Algorithm algo)
         return solution;
     }
 
-    //printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
+    // printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
     nb_itter++;
     // print_tab(new_solution, instance->dim);
 
     while (found)
     {
         cost = cost_function(instance, new_solution);
-        //printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
+        // printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
         nb_itter++;
         // print_tab(new_solution, instance->dim);
         // printf("\n");

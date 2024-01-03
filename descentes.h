@@ -9,6 +9,9 @@ int *best_improver_swap(Instance *instance, int *solution, int cost, Move *moves
 int *worst_improver_swap(Instance *instance, int *solution, int cost, Move *moves, int num_moves, int *best_found);
 int *first_improver_swap(Instance *instance, int *solution, int cost, Move *moves, int num_moves, int *best_found);
 
+int isNeighbour(Move move,int size);
+
+
 // 2-opt
 int new_cost_2opt(Instance *instance, int *solution, int cost, Move move);
 int *apply_move_2opt(int *solution, int size, Move move);
