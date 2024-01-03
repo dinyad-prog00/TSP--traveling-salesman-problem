@@ -37,6 +37,14 @@
 \usetikzlibrary{positioning} % Additional library for relative positioning 
 \usetikzlibrary{calc} % Additional library for calculating within tikz
 
+\usepackage[
+url=true,
+backend=biber,        % compilateur par défaut pour biblatex
+sorting=nyt,          % trier par nom, année, titre
+bibstyle=numeric,  % style de bibliographie alphabétique
+]{biblatex}
+\addbibresource{General/References.bib}
+
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \renewcommand{\algorithmicrequire}{\textbf{Entrée:}}

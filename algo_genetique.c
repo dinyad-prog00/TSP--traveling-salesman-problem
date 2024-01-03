@@ -13,6 +13,7 @@ Individual *initialize_population(Instance *instance, int population_size)
     return population;
 }
 
+
 Individual tournament_selection(Individual *population, int population_size, int tournament_size)
 {
     // Sélectionnons plusieurs individus aléatoires, puis retournons le meilleur
@@ -26,8 +27,6 @@ Individual tournament_selection(Individual *population, int population_size, int
             best_individual = random_individual;
         }
     }
-
-    // printf("\n\n=============test cost: %d========\n",best_individual.cost);
     return best_individual;
 }
 
@@ -59,6 +58,8 @@ int *generate_n_positions(int size, int n)
     return gen;
 }
 
+
+
 int contains(int *array, int size, int value)
 {
     for (int i = 0; i < size; i++)
@@ -71,30 +72,27 @@ int contains(int *array, int size, int value)
     return 0;
 }
 
+
+/**
+ * Nous choisissons aléatoirement nb_gen gènes du parent 1 et les copions à la même position dans l’enfant 1. 
+ * Puis nous copions les gènes restants du parent 2 dans l’ordre dans lequel ils apparaissent. 
+ * Ensuite, nous recommençons de même pour l’enfant 2 en commençant par le parent 2.
+*/
 void crossover(Instance *instance, Individual parent1, Individual parent2, Individual *child1, Individual *child2)
 {
 
-    int size = instance->dim, nb_gen = instance->dim / 3;
+    int size = instance->dim, nb_gen = instance->dim / 3; // choix de nombre de genes pour le croisement
+
     // Sélectionner nb_gen positions aléatoires
     int *positions = generate_n_positions(size, nb_gen);
 
-    // Trier les positions pour faciliter la copie
-    for (int i = 0; i < nb_gen - 1; i++)
-    {
-        for (int j = i + 1; j < nb_gen; j++)
-        {
-            if (positions[i] > positions[j])
-            {
-                int temp = positions[i];
-                positions[i] = positions[j];
-                positions[j] = temp;
-            }
-        }
-    }
+    
 
     // Initialiser les solutions des enfants
     child1->solution = (int *)malloc(size * sizeof(int));
     child2->solution = (int *)malloc(size * sizeof(int));
+
+
     for (int i = 0; i < size; i++)
     {
         child1->solution[i] = -1;
@@ -148,11 +146,13 @@ void crossover(Instance *instance, Individual parent1, Individual parent2, Indiv
 
     child1->cost = cost_function(instance, child1->solution);
     child2->cost = cost_function(instance, child2->solution);
-
-    // printf("|==========%d=========|",child1->cost);
     free(positions);
 }
 
+
+/**
+ * La mutation est simplement une permutation de deux gènes, tirés aléatoirement
+*/
 void mutate(Instance *instance, Individual *individual)
 {
     // Sélectionner deux positions aléatoires à permuter
@@ -174,6 +174,8 @@ void mutate(Instance *instance, Individual *individual)
     individual->cost = cost_function(instance, individual->solution);
 }
 
+
+
 int *genetic_algorithm(Instance *instance, int nb_generations, int population_size, double crossover_rate, double mutation_rate)
 {
     Individual *population = initialize_population(instance, population_size);
@@ -190,24 +192,23 @@ int *genetic_algorithm(Instance *instance, int nb_generations, int population_si
 
             Individual child1, child2;
 
-            if (rand() / (double)RAND_MAX < crossover_rate)
+            if (rand() / (double)RAND_MAX < crossover_rate) // simulation de probabilté (nb aléatoire entre 0 et 1)
             {
 
                 crossover(instance, parent1, parent2, &child1, &child2);
             }
             else
             {
-
                 child1 = parent1;
                 child2 = parent2;
             }
 
-            if (rand() / (double)RAND_MAX < mutation_rate)
+            if (rand() / (double)RAND_MAX < mutation_rate) // simulation de probabilté (nb aléatoire entre 0 et 1)
             {
 
                 mutate(instance, &child1);
             }
-            if (rand() / (double)RAND_MAX < mutation_rate)
+            if (rand() / (double)RAND_MAX < mutation_rate) // simulation de probabilté (nb aléatoire entre 0 et 1)
             {
                 mutate(instance, &child2);
             }

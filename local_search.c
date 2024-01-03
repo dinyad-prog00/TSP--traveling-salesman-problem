@@ -1,5 +1,7 @@
 #include "local_search.h"
 #include "lib.h"
+
+//ILS
 int *apply_pertubations(int *solution, int size, MoveApplicator move_applicator, Move *moves, int num_moves, int nb_pertubations)
 {
     int *new = (int *)malloc(size * sizeof(int));
@@ -31,26 +33,14 @@ int *iterated_local_search(Instance *instance, int *soltution, Algorithm algo, M
     while (nombre_evaluations < max_eval)
     {
         int *new_sol = descente(instance, cur_sol, algo);
-
-        // printf("\033[33mnew_sol ++++\n");
-        // print_tab(best_sol, instance->dim);
-        // print_tab(new_sol, instance->dim);
-        // printf("new_sol ----\033[0m\n");
-
-        // printf("\nnew=%d, old=%d\n", cost_function(instance, new_sol), cost_function(instance, best_sol));
+    
         if (cost_function(instance, new_sol) < cost_function(instance, best_sol))
         {
-            // printf("\n\033[31mbest found==========================\033[0m\n");
             best_sol = new_sol;
         }
 
         cur_sol = apply_pertubations(best_sol, instance->dim, move_applicator, moves, nb_moves, nb_pertubations);
-        // printf("\033[31mpertub ++++\n");
-        // print_tab(best_sol, instance->dim);
-        // print_tab(cur_sol, instance->dim);
-        // printf("pertub ----\033[0m\n");
-        step++;
-        // printf("\nstep ILS: %d", step);
+        step++; //log purpose
     }
 
     return best_sol;
@@ -75,6 +65,9 @@ int *iterated_local_search_first_improver_2opt(Instance *instance, int *soltutio
 {
     return iterated_local_search(instance, soltution, first_improver_2opt, apply_move_2opt, nb_pertubations, max_eval);
 }
+
+
+//SW
 
 Move *generate_n_moves(Move *moves, int nb_moves, int n)
 {

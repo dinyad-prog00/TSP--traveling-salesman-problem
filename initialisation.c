@@ -1,6 +1,9 @@
 #include "initialisation.h"
 #include "lib.h"
+
+//Variable globale externe definie dans lib.h
 int nombre_evaluations;
+
 int **locate_matrix_memory(int size)
 {
     int **matrix;
@@ -35,6 +38,7 @@ int **locate_matrix_memory(int size)
     return matrix;
 }
 
+//Seulement pour les matrices asymétriques
 Instance *load_instance(char *file_name)
 {
     Instance *instance = malloc(sizeof(Instance));
@@ -101,6 +105,8 @@ Instance *load_instance(char *file_name)
     return instance;
 }
 
+
+
 void print_matrix(int **matrix, int size)
 {
     for (int i = 0; i < size; i++)
@@ -116,11 +122,6 @@ void print_matrix(int **matrix, int size)
 void print_tab(int *tab, int size)
 {
 
-    // if(tab==NULL){
-    //     printf("Oh no!!!!");
-    // }else{
-    //      printf("Oh yess!!!!");
-    // }
     for (int i = 0; i < size; i++)
     {
 
@@ -128,6 +129,7 @@ void print_tab(int *tab, int size)
     }
     printf("\n");
 }
+
 
 int *random_solution(int size, int seed)
 {
@@ -150,8 +152,10 @@ int *random_solution(int size, int seed)
     return permutation;
 }
 
+
 int cost_function(Instance *instance, int *solution)
 {
+    
     /// Incrementer le nombre d'évaluation pour chaque appel
     nombre_evaluations++;
     ///
@@ -166,6 +170,7 @@ int cost_function(Instance *instance, int *solution)
 
     return ct;
 }
+
 
 Move *generate_swap_moves(int num_cities, int *num_moves)
 {

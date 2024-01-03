@@ -1,4 +1,4 @@
-\section{Résultats obtenus}
+\section{Résultats et analyses}
 
 \subsection{Descentes}
 \subsubsection{Résultats des versus}
@@ -107,7 +107,7 @@ En prenant la moyenne des scores, on a :
 	\end{tabular}
 \end{table}
 
-On constate que dans le deux cas, \textbf{first} semble être la meilleur méthode.
+On constate que dans le deux cas, \textbf{first} semble être la meilleur méthode. La relation \textbf{swap} semple aussi marcher le mieux.
 
 %On peut aussi déduire des deux premiers tableaux que\textbf{ first} gagne \textbf{115} fois contre \textbf{worst} et\textbf{ worst} seulement \textbf{45} fois contre \textbf{first}. 
 \subsubsection{Durée et influence de l'évaluation incrémentale}
@@ -128,7 +128,8 @@ Le tableau suivant résume la durée moyenne des \textbf{descentes swap} avec et
 	\end{tabular}
 \end{table}
 
-Il en ressort que \textbf{first} est plus rapide que \textbf{best} qui est plus rapide que \textbf{worst}. On remarque aussi que l'\textbf{évaluation incrémentale} a considérablement améloré la rapidité. 
+Il en ressort que \textbf{first} est plus rapide que \textbf{best} qui est plus rapide que \textbf{worst}. Normal car first ne perd pas son temps à vouloir tout vérifier.
+On remarque aussi que l'\textbf{évaluation incrémentale} a considérablement améloré la rapidité. 
 
 
 \subsection{ILS et SW}
@@ -229,5 +230,39 @@ On constate que \textbf{first} domine \textbf{best} pour 2opt mais pas pour swap
 			\bottomrule
 		\end{tabular}
 	\end{table}
-	On constate que \textbf{swap} domine \textbf{2opt}.
+	On constate que \textbf{swap} domine \textbf{2opt}. La meuilleure moyenne ILS (swap\_best : 1161.33750) est meuilleur par rapport à celle de SW (swap : 1209.74375).
+	
 \end{itemize}
+
+\subsubsection{Algorithme génétique}
+L'exécution des 8 instances sur l'Algorithme génétique on donné de bons résultats. Voici les paramètres utilisés : 
+\begin{itemize}
+	\item  nombre de generations = 1000 ; 
+	\item  taille de la population = 50 ;
+	 \item probabilité de croisement(crossover\_rate) = 0.7 ; 
+	\item   probabilité de mutation (mutation\_rate) = 0.1 ;  
+\end{itemize}
+
+	\begin{table}[H]
+	\rowcolors{2}{gray!10}{white}
+	\centering
+	\caption{Les scores pour l'Algorithme génétique}
+	\begin{tabular}[t]
+		{m{0.2\textwidth}m{0.2\textwidth}}
+		\toprule
+		instances &	Scores  \\
+		
+		\midrule
+		rand\_50\_75.txt& 1720	\\
+		rand\_50\_100.txt& 580	\\
+		rand\_60\_50.txt& 842	\\
+		rand\_60\_100.txt& 1870	\\
+		rand\_70\_55.txt&	481\\
+		rand\_70\_100.txt&	1164\\
+		rand\_80\_70.txt&1357	\\
+		rand\_80\_100.txt&	1372\\
+		
+		
+		\bottomrule
+	\end{tabular}
+\end{table}

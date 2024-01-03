@@ -35,7 +35,12 @@ int *apply_move_2opt(int *solution, int size, Move move)
 
 int new_cost_swap(Instance *instance, int *solution, int cost, Move move)
 {
-    if ( (move.c1 == 0 && move.c2 == instance->dim - 1) || (move.c1 != instance->dim - 1 && move.c2 != 0 && move.c1 > move.c2))
+    // Evaluation incrémentale
+    //-----------------------------
+
+    // S'assurer que le couple est dans le bon ordre, décommenter pour test pour les descentes et seulement les decsentes
+    /*
+    if ((move.c1 == 0 && move.c2 == instance->dim - 1) || (move.c1 != instance->dim - 1 && move.c2 != 0 && move.c1 > move.c2))
     {
         int tmp = move.c1;
         move.c1 = move.c2;
@@ -60,11 +65,16 @@ int new_cost_swap(Instance *instance, int *solution, int cost, Move move)
     }
 
     return new_cost;
-    // int *new_sol = apply_move_swap(solution, instance->dim, move);
-    // int c = cost_function(instance, new_sol);
-    // free(new_sol);
-    // assert(new_cost == c);
-    // return c;
+    */
+
+    // Evaluation non incrémentale
+    //-----------------------------
+
+    int *new_sol = apply_move_swap(solution, instance->dim, move);
+    int c = cost_function(instance, new_sol);
+    free(new_sol);
+    //assert(new_cost == c);
+    return c;
 }
 
 int new_cost_2opt(Instance *instance, int *solution, int cost, Move move)
@@ -165,7 +175,6 @@ int isNeighbour(Move move, int size)
     return ((move.c1 == 0 && move.c2 == size - 1) || (move.c2 == 0 && move.c1 == size - 1) || move.c1 == move.c2 + 1 || move.c2 == move.c1 + 1);
 }
 
-
 int *best_improver_2opt(Instance *instance, int *solution, int cost, Move *moves, int num_moves, int *best_found)
 {
 
@@ -265,21 +274,17 @@ int *descente(Instance *instance, int *solution, Algorithm algo)
         // printf("No improvement done");
         return solution;
     }
-
     // printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
-    nb_itter++;
-    // print_tab(new_solution, instance->dim);
+    // nb_itter++;
 
     while (found)
     {
         cost = cost_function(instance, new_solution);
         // printf("\nitter %d => , found :%d , cost : %d", nb_itter, found, cost);
         nb_itter++;
-        // print_tab(new_solution, instance->dim);
-        // printf("\n");
         best_solution = new_solution;
         new_solution = algo(instance, new_solution, cost, moves, num_moves, &found);
-        nb_itter++;
+        // nb_itter++;
     }
 
     return best_solution;

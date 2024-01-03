@@ -1,0 +1,9 @@
+Instance,Score
+instances/atsp_rand_50_75.txt,1745
+instances/atsp_rand_50_100.txt,666
+instances/atsp_rand_60_50.txt,900
+instances/atsp_rand_60_100.txt,1943
+instances/atsp_rand_70_55.txt,508
+instances/atsp_rand_70_100.txt,1451
+instances/atsp_rand_80_70.txt,1667
+instances/atsp_rand_80_100.txt,1607

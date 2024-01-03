@@ -13,11 +13,12 @@ Le projet est composé de 4 pairs de fichier (.c et .h):
 - `descentes`: Réponses aux questions de la Partie 2
 - `local_search`: Réponses aux questions de la Partie 3 (ILS et SW)
 - `execution_comparison` : Protocole expérimental, partie 4
+- `algo_genetique`: Algorithme génétique : Bonus
 
 L'entêtes des fonctions implémentées se trouvent dans les fichiers .h. Les fonctions de certaines parties utilisent celles des parties précedentes. 
 
 #### Fichier execution_comparison(.h et .c)
-Ici nous avons les fonctions `execute_descentes`, `execute_ILS`, `execute_SW` qui lancent les éxécutions des algos de descentes, ILS et SW respectivement et enregistrent le rapports dans des fichiers csv dans les dossiers execution_results*.
+Ici nous avons les fonctions `execute_descentes`, `execute_ILS`, `execute_SW`, `execute_genetique` qui lancent les éxécutions des algos de descentes, ILS et SW respectivement et enregistrent le rapports dans des fichiers csv dans les dossiers execution_results*.
 
 Ces fonctions sont appellées dans la fonction `execution` où les differents arguments sont initialisés. On peut appeler seulement l'une ou deux d'entre elles selon ce qu'on souhaite lancer (c'est plus simple de commenter).
 

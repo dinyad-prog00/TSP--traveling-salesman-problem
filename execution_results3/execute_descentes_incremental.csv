@@ -1,0 +1,2 @@
+Instance,Algorithme,Seed,Score,CPU-Used-Time (ms)
+instances/atsp_rand_50_75.txt,best_improver_swap_descente,50,1710,2.673000
